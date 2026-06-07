@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pphn — Documentary Photographer</title>
+
+  <!-- ── INTEGRATION: OG tags for social sharing ── -->
+  <meta property="og:title" content="pphn — Documentary Photographer" />
+  <meta property="og:description"
+    content="Documentary photographer from Yangon, Myanmar. Light · Shadow · Story · Human." />
+  <meta property="og:url" content="https://pphn.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://pphn.github.io/photos/barbed-pyramids.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://pphn.github.io/" />
+  <!-- ── FAVICON (inline SVG — no extra file needed) ── -->
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26' fill='%23c9a84c'%3Ep%3C/text%3E%3C/svg%3E" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #c9a84c;
+      --dark: #0a0a0a;
+      --mid: #111;
+      --light: #f0ebe0;
+      --red: #e63946;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .35;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* LANG */
+    .lang-btn {
+      position: fixed;
+      top: 1.4rem;
+      right: 5.5rem;
+      z-index: 200;
+      background: rgba(201, 168, 76, .15);
+      border: 1px solid rgba(201, 168, 76, .3);
+      color: var(--gold);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      padding: .35rem .8rem;
+      cursor: pointer;
+      transition: .3s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .lang-btn:hover {
+      background: rgba(201, 168, 76, .3);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(10, 10, 10, .95), transparent);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      letter-spacing: .2em;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      opacity: .65;
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .nav-shop {
+      background: var(--gold);
+      color: #000 !important;
+      opacity: 1 !important;
+      padding: .35rem .9rem;
+      font-weight: 500;
+    }
+
+    .nav-shop:hover {
+      background: #e8c060 !important;
+    }
+
+    /* HERO */
+    #hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 55% 45%, #1a1200, #0a0a0a 70%);
+      z-index: 0;
+    }
+
+    .hero-cursor {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+
+    .hero-cursor-ring {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201, 168, 76, .5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      transition: all .15s ease;
+    }
+
+    .hero-lines::before,
+    .hero-lines::after {
+      content: '';
+      position: absolute;
+      border: 1px solid rgba(201, 168, 76, .06);
+    }
+
+    .hero-lines::before {
+      inset: 3rem;
+    }
+
+    .hero-lines::after {
+      inset: 5rem;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .hero-tag {
+      font-size: .65rem;
+      letter-spacing: .45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .8;
+      margin-bottom: 1.2rem;
+      animation: fadeUp .8s ease both;
+    }
+
+    h1.hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 13vw, 11rem);
+      line-height: .88;
+      letter-spacing: -.02em;
+      animation: fadeUp .8s .15s ease both;
+    }
+
+    h1.hero-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: .78rem;
+      letter-spacing: .25em;
+      opacity: .45;
+      text-transform: uppercase;
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .hero-mm {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .95rem;
+      color: rgba(201, 168, 76, .6);
+      margin-top: .6rem;
+      animation: fadeUp .8s .45s ease both;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      opacity: .35;
+      animation: fadeUp .8s .9s ease both;
+    }
+
+    .scroll-hint span {
+      font-size: .6rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 45px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    /* SHARED */
+    .section-label {
+      font-size: .6rem;
+      letter-spacing: .45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .7rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 7rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .about-text {
+      font-size: .9rem;
+      line-height: 2;
+      opacity: .62;
+      margin-bottom: 1rem;
+    }
+
+    .about-quote {
+      border-left: 2px solid var(--gold);
+      padding-left: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(201, 168, 76, .85);
+      margin: 1.5rem 0;
+      line-height: 1.6;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      border-top: 1px solid rgba(201, 168, 76, .18);
+      padding-top: .8rem;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .45;
+      margin-top: .15rem;
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border: 1px solid rgba(201, 168, 76, .12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-photo::after {
+      content: '';
+      position: absolute;
+      top: -1.2rem;
+      right: -1.2rem;
+      width: 55%;
+      height: 55%;
+      border: 1px solid rgba(201, 168, 76, .08);
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════
+   PROJECTS — HORIZONTAL TIMELINE JOURNEY MAP
+   ═══════════════════════════════════════════ */
+    #projects {
+      padding: 5rem 0 0;
+      overflow: hidden;
+    }
+
+    .projects-head {
+      padding: 0 2.5rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .timeline-hint {
+      font-size: .6rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      opacity: .3;
+      margin-top: .8rem;
+    }
+
+    .timeline-hint span {
+      color: var(--gold);
+    }
+
+    /* Outer scroll container */
+    .timeline-track {
+      position: relative;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 3rem 4rem 0;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .timeline-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .timeline-track.grabbing {
+      cursor: grabbing;
+    }
+
+    /* The inner strip — wider than viewport */
+    .timeline-strip {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: max-content;
+      padding-bottom: 0;
+    }
+
+    /* The golden line */
+    .tl-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201, 168, 76, .4) 5%, rgba(201, 168, 76, .4) 95%, transparent);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* Each node wrapper */
+    .tl-node {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 200px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .tl-year {
+      font-size: .6rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .5;
+      margin-bottom: .8rem;
+      transition: .3s;
+    }
+
+    .tl-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(201, 168, 76, .35);
+      background: var(--dark);
+      position: relative;
+      z-index: 2;
+      transition: .4s;
+      flex-shrink: 0;
+    }
+
+    .tl-dot::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 168, 76, 0);
+      transition: .4s;
+    }
+
+    .tl-name {
+      font-family: 'Playfair Display', serif;
+      font-size: .9rem;
+      font-style: italic;
+      text-align: center;
+      margin-top: .8rem;
+      opacity: .45;
+      transition: .3s;
+      max-width: 160px;
+      line-height: 1.3;
+    }
+
+    .tl-tag {
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      margin-top: .4rem;
+      transition: .3s;
+    }
+
+    /* Active node */
+    .tl-node.active .tl-dot {
+      background: var(--gold);
+      border-color: var(--gold);
+      transform: scale(1.4);
+      box-shadow: 0 0 20px rgba(201, 168, 76, .4);
+    }
+
+    .tl-node.active .tl-dot::after {
+      border-color: rgba(201, 168, 76, .2);
+      inset: -10px;
+    }
+
+    .tl-node.active .tl-year {
+      opacity: 1;
+    }
+
+    .tl-node.active .tl-name {
+      opacity: 1;
+      color: var(--light);
+    }
+
+    .tl-node.active .tl-tag {
+      opacity: .7;
+    }
+
+    .tl-node:hover .tl-dot {
+      border-color: var(--gold);
+    }
+
+    .tl-node:hover .tl-name {
+      opacity: .8;
+    }
+
+    /* Project detail panel */
+    .project-detail {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .6s cubic-bezier(.4, 0, .2, 1), opacity .5s ease;
+      opacity: 0;
+    }
+
+    .project-detail.open {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .pd-inner {
+      border-top: 1px solid rgba(201, 168, 76, .15);
+      padding: 3rem 0 5rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .pd-left {}
+
+    .pd-year-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: rgba(201, 168, 76, .1);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    .pd-tag-pill {
+      display: inline-block;
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      border: 1px solid rgba(201, 168, 76, .25);
+      color: var(--gold);
+      padding: .3rem .7rem;
+      margin-bottom: 1rem;
+    }
+
+    .pd-status {
+      font-size: .6rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      opacity: .35;
+    }
+
+    .pd-right {}
+
+    .pd-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      margin-bottom: 1rem;
+    }
+
+    .pd-desc {
+      font-size: .88rem;
+      line-height: 2;
+      opacity: .55;
+      margin-bottom: 1.5rem;
+    }
+
+    .pd-link {
+      display: inline-block;
+      font-size: .65rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 168, 76, .3);
+      padding-bottom: .2rem;
+      transition: .3s;
+    }
+
+    .pd-link:hover {
+      border-color: var(--gold);
+    }
+
+    /* ── NOTE FOR FUTURE: replace pd-link hrefs with local pages/project-name.html ── */
+
+    /* ═══════════════════════════════════
+   GALLERY — INTERACTIVE
+   ═══════════════════════════════════ */
+    #gallery {
+      padding: 5rem 2.5rem;
+      background: var(--mid);
+    }
+
+    .gallery-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .gallery-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .gc-filter {
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .35;
+      cursor: pointer;
+      transition: .3s;
+      padding: .3rem .6rem;
+      border: 1px solid transparent;
+    }
+
+    .gc-filter:hover,
+    .gc-filter.active {
+      opacity: 1;
+      color: var(--gold);
+      border-color: rgba(201, 168, 76, .3);
+    }
+
+    .gc-total {
+      margin-left: auto;
+      font-size: .6rem;
+      letter-spacing: .2em;
+      opacity: .25;
+      text-transform: uppercase;
+    }
+
+    .masonry {
+      columns: 3;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: .8rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--dark);
+    }
+
+    .photo-wrap {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+
+    .masonry-item:hover .photo-wrap img {
+      transform: scale(1.04);
+    }
+
+    /* Photo actions bar */
+    .photo-actions {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+      padding: 1rem .8rem .7rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      transform: translateY(100%);
+      transition: .35s ease;
+      z-index: 3;
+    }
+
+    .masonry-item:hover .photo-actions {
+      transform: translateY(0);
+    }
+
+    .photo-title-tag {
+      font-size: .58rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--light);
+      opacity: .7;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Heart button */
+    .btn-heart {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      padding: .3rem;
+      transition: .2s;
+      color: var(--light);
+      opacity: .6;
+    }
+
+    .btn-heart:hover {
+      opacity: 1;
+    }
+
+    .btn-heart.liked {
+      color: #e63946;
+      opacity: 1;
+    }
+
+    .btn-heart svg {
+      width: 14px;
+      height: 14px;
+      transition: .25s;
+    }
+
+    .btn-heart.liked svg {
+      transform: scale(1.2);
+    }
+
+    .heart-count {
+      font-size: .6rem;
+      letter-spacing: .05em;
+      min-width: .8rem;
+    }
+
+    /* Share button */
+    .btn-share {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: .3rem;
+      color: var(--light);
+      opacity: .5;
+      transition: .2s;
+    }
+
+    .btn-share:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .btn-share svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    /* Expand / lightbox trigger */
+    .btn-expand {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: .3rem;
+      color: var(--light);
+      opacity: .5;
+      transition: .2s;
+    }
+
+    .btn-expand:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .btn-expand svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(201, 168, 76, .12);
+      border: 1px solid rgba(201, 168, 76, .3);
+      color: var(--gold);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .6rem 1.5rem;
+      z-index: 2000;
+      opacity: 0;
+      transition: .4s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .96);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lb-img-wrap {
+      position: relative;
+      max-width: 90vw;
+      max-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lb-img-wrap img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 1.8rem;
+      color: var(--light);
+      cursor: pointer;
+      opacity: .5;
+      transition: .2s;
+      z-index: 2;
+    }
+
+    .lb-close:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .lb-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201, 168, 76, .08);
+      border: 1px solid rgba(201, 168, 76, .2);
+      color: var(--gold);
+      font-size: 1.3rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: .5;
+      transition: .25s;
+    }
+
+    .lb-arrow:hover {
+      opacity: 1;
+      background: rgba(201, 168, 76, .18);
+    }
+
+    .lb-arrow.prev {
+      left: 1.5rem;
+    }
+
+    .lb-arrow.next {
+      right: 1.5rem;
+    }
+
+    .lb-meta {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .lb-title {
+      font-size: .7rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+
+    .lb-counter {
+      font-size: .55rem;
+      letter-spacing: .3em;
+      color: var(--gold);
+      opacity: .3;
+      margin-top: .3rem;
+    }
+
+    /* Lightbox action row */
+    .lb-actions {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: .8rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lb-btn {
+      background: none;
+      border: 1px solid rgba(201, 168, 76, .2);
+      color: var(--gold);
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .4rem 1rem;
+      cursor: pointer;
+      transition: .3s;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .lb-btn:hover {
+      background: rgba(201, 168, 76, .12);
+    }
+
+    .lb-btn.liked {
+      border-color: rgba(230, 57, 70, .4);
+      color: #e63946;
+    }
+
+    .lb-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* SHOP */
+    #shop {
+      padding: 6rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .shop-intro {
+      font-size: .88rem;
+      line-height: 1.9;
+      opacity: .55;
+      max-width: 550px;
+      margin-bottom: 3rem;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .shop-card {
+      border: 1px solid rgba(201, 168, 76, .1);
+      padding: 1.5rem;
+      transition: .35s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .shop-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201, 168, 76, .04), transparent);
+      opacity: 0;
+      transition: .3s;
+    }
+
+    .shop-card:hover::before {
+      opacity: 1;
+    }
+
+    .shop-card:hover {
+      border-color: rgba(201, 168, 76, .35);
+      transform: translateY(-3px);
+    }
+
+    .shop-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--c2, #181818);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .shop-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .shop-img span {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      opacity: .2;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shop-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: .3rem;
+    }
+
+    .shop-type {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .4;
+      margin-bottom: .6rem;
+    }
+
+    .shop-price {
+      font-size: .85rem;
+      color: var(--gold);
+    }
+
+    .shop-cta-wrap {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .shop-cta {
+      display: inline-block;
+      padding: .9rem 2.5rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: .75rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: .3s;
+    }
+
+    .shop-cta:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .shop-cta.secondary {
+      border-color: rgba(201, 168, 76, .3);
+      color: rgba(201, 168, 76, .55);
+    }
+
+    .shop-cta.secondary:hover {
+      background: transparent;
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 7rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--mid);
+    }
+
+    #contact::before {
+      content: 'pphn';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: 22vw;
+      color: rgba(201, 168, 76, .025);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .contact-sub {
+      opacity: .48;
+      font-size: .85rem;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-link {
+      font-size: .9rem;
+      color: var(--light);
+      text-decoration: none;
+      opacity: .6;
+      transition: .3s;
+      letter-spacing: .08em;
+    }
+
+    .contact-link:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      font-size: .65rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+      opacity: .35;
+      transition: .3s;
+    }
+
+    .social-link:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    footer {
+      border-top: 1px solid rgba(201, 168, 76, .08);
+      padding: 1.8rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      opacity: .35;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        opacity: .35;
+      }
+
+      50% {
+        opacity: .7;
+      }
+    }
+
+    @media(max-width:900px) {
+      .pd-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .pd-year-big {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media(max-width:768px) {
+      nav {
+        padding: 1.1rem 1.2rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .lang-btn {
+        right: 4.5rem;
+        font-size: .6rem;
+      }
+
+      #about {
+        grid-template-columns: 1fr;
+        padding: 4rem 1.2rem;
+        gap: 2rem;
+      }
+
+      .about-photo {
+        display: none;
+      }
+
+      .masonry {
+        columns: 2;
+      }
+
+      .shop-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      #contact {
+        padding: 4rem 1.2rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: .6rem;
+        text-align: center;
+      }
+
+      .tl-node {
+        width: 160px;
+      }
+    }
+
+    @media(max-width:480px) {
+      .nav-links {
+        display: none;
+      }
+
+      .masonry {
+        columns: 1;
+      }
+
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tl-node {
+        width: 140px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">မြန်မာ</button>
+
+  <nav>
+    <div class="logo">pphn</div>
+    <ul class="nav-links">
+      <li><a href="#about" data-en="About" data-mm="အကြောင်း">About</a></li>
+      <li><a href="#projects" data-en="Projects" data-mm="စီမံချက်များ">Projects</a></li>
+      <li><a href="#gallery" data-en="Gallery" data-mm="ဓာတ်ပုံများ">Gallery</a></li>
+      <li><a href="#shop" data-en="Shop" data-mm="ဆိုင်">Shop</a></li>
+      <li><a href="#contact" data-en="Contact" data-mm="ဆက်သွယ်ရန်">Contact</a></li>
+      <li><a href="https://pphn.creator-spring.com/" target="_blank" class="nav-shop" data-en="Store ↗"
+          data-mm="ဆိုင် ↗">Store ↗</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-cursor" id="cursor"></div>
+    <div class="hero-cursor-ring" id="cursorRing"></div>
+    <div class="hero-content">
+      <p class="hero-tag" data-en="Documentary Photographer · Yangon, Myanmar"
+        data-mm="မှတ်တမ်းဓာတ်ပုံဆရာ · ရန်ကုန်မြို့၊ မြန်မာနိုင်ငံ">Documentary Photographer · Yangon, Myanmar</p>
+      <h1 class="hero-name">pp<em>hn</em></h1>
+      <p class="hero-sub" data-en="Light · Shadow · Story · Human" data-mm="အလင်း · အမှောင် · ဇာတ်လမ်း · လူသား">Light ·
+        Shadow · Story · Human</p>
+      <p class="hero-mm" data-en='"welcome 2079"' data-mm='"ကြိုဆိုပါတယ် ၂၀၇၉"'>"welcome 2079"</p>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span data-en="scroll" data-mm="ဆင်းကြည့်ပါ">scroll</span>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="reveal">
+      <p class="section-label" data-en="Origin" data-mm="မွေးဖွားခြင်း">Origin</p>
+      <h2 class="section-title" data-en="Life of<br><em style='font-style:italic;color:var(--gold)'>Little</em>"
+        data-mm="သေးငယ်သော<br><em style='font-style:italic;color:var(--gold)'>ဘဝ</em>">Life of<br><em
+          style="font-style:italic;color:var(--gold)">Little</em></h2>
+      <p class="about-text" style="margin-top:1.2rem;"
+        data-en="Born near Myanmar's Irrawaddy River, raised in Yangon. Received a first camera as a gift in 2017 and decided to become a photographer. Selected for the CDPP21 program, received the Artist Relief Fund in 2022, and exhibited at Bagan. Traveled 40+ towns, climbed 23 mountains above 3,000 feet."
+        data-mm="မြန်မာနိုင်ငံ ဧရာဝတီမြစ်ဆောင်တွင် မွေးဖွား၊ ရန်ကုန်မြို့တွင် ကြီးပြင်းခဲ့သည်။ ၂၀၁၇ ခုနှစ်တွင် ပထမဆုံးကင်မရာကို လက်ဆောင်ရ၍ ဓာတ်ပုံဆရာဖြစ်ရန် ဆုံးဖြတ်ခဲ့သည်။">
+        Born near Myanmar's Irrawaddy River, raised in Yangon. Received a first camera as a gift in 2017 and decided to
+        become a photographer. Selected for the CDPP21 program, received the Artist Relief Fund in 2022, and exhibited
+        at Bagan. Traveled 40+ towns, climbed 23 mountains above 3,000 feet.</p>
+      <blockquote class="about-quote"
+        data-en="He just wants to explore the limit of human being. Just because he never trusts himself really. How far can he go?"
+        data-mm="သူဟာ လူသားရဲ့ ขอบเขตကို စူးစမ်းချင်တာပဲ။ သူဟာ ကိုယ့်ကိုကိုယ် တကယ်ယုံကြည်ဖူးတာ မဟုတ်ဘူး။ သူဘယ်လောက်ဝေးဝေးသွားနိုင်မလဲ?">
+        "He just wants to explore the limit of human being. Just because he never trusts himself really. How far can he
+        go?"</blockquote>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">7+</div>
+          <div class="stat-label" data-en="Years Shooting" data-mm="ဓာတ်ပုံနှစ်">Years Shooting</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">40+</div>
+          <div class="stat-label" data-en="Towns Traveled" data-mm="မြို့ပေါင်း">Towns Traveled</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">23</div>
+          <div class="stat-label" data-en="Mountains Climbed" data-mm="တောင်ထိပ်များ">Mountains Climbed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">ARF</div>
+          <div class="stat-label" data-en="2022 Bagan Exhibition" data-mm="ဘားဂံပြပွဲ ၂၀၂၂">2022 Bagan Exhibition</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-photo reveal" style="background:url('photos/portrait.jpg') center/cover;"></div>
+  </section>
+
+  <!-- ── PROJECTS: HORIZONTAL TIMELINE ── -->
+  <section id="projects">
+    <div class="projects-head reveal">
+      <p class="section-label" data-en="Selected Work" data-mm="ရွေးချယ်ထားသောလုပ်ငန်းများ">Selected Work</p>
+      <h2 class="section-title" data-en="A Journey in Six Chapters" data-mm="အခန်းခြောက်ခန်းဇာတ်လမ်းတစ်ပုဒ်">A Journey
+        in Six Chapters</h2>
+      <p class="timeline-hint" data-en="← drag or scroll the timeline · click a node to explore →"
+        data-mm="← timeline ကို ဆွဲပါ · node ကို နှိပ်ပါ →">← drag or scroll the timeline · click a <span>●</span> to
+        explore →</p>
+    </div>
+
+    <div class="timeline-track reveal" id="timelineTrack">
+      <div class="timeline-strip" id="timelineStrip">
+        <div class="tl-line"></div>
+        <!-- nodes injected by JS -->
+      </div>
+    </div>
+
+    <!-- Project detail panel (slides open below timeline) -->
+    <div class="project-detail" id="projectDetail">
+      <div class="pd-inner">
+        <div class="pd-left">
+          <div class="pd-year-big" id="pdYear"></div>
+          <div class="pd-tag-pill" id="pdTag"></div><br>
+          <div class="pd-status" id="pdStatus"></div>
+        </div>
+        <div class="pd-right">
+          <div class="pd-title" id="pdTitle"></div>
+          <div class="pd-desc" id="pdDesc"></div>
+          <!-- ── FUTURE: replace href with pages/project-slug.html when you create local project pages ── -->
+          <a class="pd-link" id="pdLink" href="#" target="_blank" data-en="View Project ↗"
+            data-mm="Project ကြည့်မည် ↗">View Project ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALLERY ── -->
+  <section id="gallery">
+    <div class="gallery-inner">
+      <div class="section-header reveal" style="text-align:center;">
+        <p class="section-label" data-en="Visual Images · 2024" data-mm="ဓာတ်ပုံများ · ၂၀၂၄">Visual Images · 2024</p>
+        <h2 class="section-title" data-en="The Gallery" data-mm="ဓာတ်ပုံပြခန်း">The Gallery</h2>
+        <div class="gallery-controls">
+          <span class="gc-filter active" data-filter="all" onclick="filterGallery(this,'all')" data-en="All"
+            data-mm="အားလုံး">All</span>
+          <span class="gc-filter" data-filter="bnw" onclick="filterGallery(this,'bnw')" data-en="B&amp;W"
+            data-mm="B&amp;W">B&amp;W</span>
+          <span class="gc-filter" data-filter="color" onclick="filterGallery(this,'color')" data-en="Color"
+            data-mm="အရောင်">Color</span>
+          <span class="gc-filter" data-filter="street" onclick="filterGallery(this,'street')" data-en="Street"
+            data-mm="လမ်းမပေါ်">Street</span>
+          <span class="gc-filter" data-filter="light" onclick="filterGallery(this,'light')" data-en="Light&amp;Shadow"
+            data-mm="အလင်းအမှောင်">Light&amp;Shadow</span>
+          <span class="gc-total" id="gcTotal">21 photos</span>
+          <span style="font-size:.6rem;letter-spacing:.2em;color:var(--gold);opacity:.5;" id="totalLikesCount"></span>
+        </div>
+      </div>
+      <div class="masonry reveal" id="masonry"></div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section id="shop">
+    <div class="reveal">
+      <p class="section-label" data-en="Limited Editions & Merch" data-mm="အကန့်အသတ်ဖြင့်ထုတ်ဝေမှုများ">Limited Editions
+        &amp; Merch</p>
+      <h2 class="section-title" data-en="The Shop" data-mm="ဆိုင်">The Shop</h2>
+      <p class="shop-intro" style="margin-top:1rem;"
+        data-en="Limited edition digital wallpapers, art prints, mugs, tote bags, notebooks and custom artworks. Each piece carries a story."
+        data-mm="ကန့်သတ်ထုတ်ဝေသော ဒစ်ဂျစ်တယ်နံရံပုံများ၊ ပုံနှိပ်ထုတ်ဝေမှုများ">Limited edition digital wallpapers, art
+        prints, mugs, tote bags, notebooks and custom artworks. Each piece carries a story.</p>
+    </div>
+    <div class="shop-grid reveal">
+      <div class="shop-card" style="--c2:#141008;">
+        <div class="shop-img"><img src="photos/mount-popa-mug.jpg" alt="mount popa mug"><span>mount popa mug</span>
+        </div>
+        <div class="shop-name" data-en="mount popa" data-mm="Mount Popa">mount popa</div>
+        <div class="shop-type" data-en="Mug" data-mm="ခွက်">Mug</div>
+        <div class="shop-price">$12.14</div>
+      </div>
+      <div class="shop-card" style="--c2:#0d0d14;">
+        <div class="shop-img"><img src="photos/nothing-is-something-notebook.jpg" alt="notebook"><span>notebook</span>
+        </div>
+        <div class="shop-name" data-en="nothing is something" data-mm="ဘာမှမဟုတ်ဘဲ">nothing is something</div>
+        <div class="shop-type" data-en="Notebook" data-mm="မှတ်စုစာအုပ်">Notebook</div>
+        <div class="shop-price">$19.94</div>
+      </div>
+      <div class="shop-card" style="--c2:#0d1208;">
+        <div class="shop-img"><img src="photos/nothing-is-something-tote.jpg" alt="tote"><span>tote</span></div>
+        <div class="shop-name" data-en="nothing is something" data-mm="ဘာမှမဟုတ်ဘဲ">nothing is something</div>
+        <div class="shop-type" data-en="Organic Tote Bag" data-mm="Tote အိတ်">Organic Tote Bag</div>
+        <div class="shop-price">$28.34</div>
+      </div>
+      <div class="shop-card" style="--c2:#141008;">
+        <div class="shop-img"><img src="photos/mount-popa-hoodie.jpg" alt="hoodie"><span>hoodie</span></div>
+        <div class="shop-name" data-en="mount popa" data-mm="Mount Popa">mount popa</div>
+        <div class="shop-type" data-en="Full Zip Hoodie" data-mm="Hoodie">Full Zip Hoodie</div>
+        <div class="shop-price">$53.54</div>
+      </div>
+      <div class="shop-card" style="--c2:#100810;">
+        <div class="shop-img"><img src="photos/limited-wallpaper.jpg" alt="wallpaper"><span>wallpaper</span></div>
+        <div class="shop-name" data-en="Limited Wallpaper" data-mm="ကန့်သတ်နံရံပုံ">Limited Wallpaper</div>
+        <div class="shop-type" data-en="Digital Download" data-mm="ဒစ်ဂျစ်တယ်">Digital Download</div>
+        <div class="shop-price" data-en="Coming Soon" data-mm="မကြာမီ">Coming Soon</div>
+      </div>
+      <div class="shop-card" style="--c2:#140808;">
+        <div class="shop-img"><img src="photos/custom-artwork.jpg" alt="custom"><span>custom</span></div>
+        <div class="shop-name" data-en="Custom Artwork" data-mm="Custom ပန်းချီ">Custom Artwork</div>
+        <div class="shop-type" data-en="Commission" data-mm="မှာယူမှု">Commission</div>
+        <div class="shop-price" data-en="Inquire" data-mm="မေးမြန်းပါ">Inquire</div>
+      </div>
+    </div>
+    <div class="shop-cta-wrap">
+      <a href="https://pphn.creator-spring.com/" target="_blank" class="shop-cta" data-en="Visit Full Store ↗"
+        data-mm="ဆိုင်သို့ သွားပါ ↗">Visit Full Store ↗</a>
+      <a href="checkout.html" class="shop-cta secondary" data-en="Direct Checkout ↗"
+        data-mm="တိုက်ရိုက်ဝယ်မည် ↗">Direct Checkout ↗</a>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner reveal">
+      <p class="section-label" data-en="Get In Touch" data-mm="ဆက်သွယ်ပါ">Get In Touch</p>
+      <h2 class="contact-title" data-en="Let's create<br>something <em>real</em>"
+        data-mm="တကယ့်တကယ်<br><em>တစ်ခုခု</em> ဖန်တီးကြစို့">Let's create<br>something <em>real</em></h2>
+      <p class="contact-sub" data-en="Open for commissions, collaborations, exhibitions, and conversations."
+        data-mm="မှာယူမှုများ၊ ပူးပေါင်းဆောင်ရွက်မှုများ၊ ပြပွဲများနှင့် စကားဝိုင်းများအတွက် ဖွင့်ထားသည်">Open for
+        commissions, collaborations, exhibitions, and conversations.</p>
+      <div class="contact-links">
+        <a href="mailto:pphn8279@proton.me" class="contact-link">pphn8279@proton.me</a>
+      </div>
+      <div class="socials">
+        <a href="https://instagram.com/pphn8279" target="_blank" class="social-link">Instagram</a>
+        <a href="https://linktr.ee/pphn" target="_blank" class="social-link">Linktree</a>
+        <a href="https://pphn.creator-spring.com/" target="_blank" class="social-link">Store</a>
+        <a href="journey.html" class="social-link">Journey</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 pphn — Pyae Phyo Htet Naing</span>
+    <span data-en="Documentary Photography · Yangon, Myanmar" data-mm="မှတ်တမ်းဓာတ်ပုံ · ရန်ကုန်">Documentary
+      Photography · Yangon, Myanmar</span>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="lb-close" onclick="closeLightbox()">✕</span>
+    <span class="lb-arrow prev" onclick="lbNav(-1)">&#8592;</span>
+    <div class="lb-img-wrap"><img id="lbImg" src="" alt="" /></div>
+    <span class="lb-arrow next" onclick="lbNav(1)">&#8594;</span>
+    <div class="lb-meta">
+      <p class="lb-title" id="lbTitle"></p>
+      <p class="lb-counter" id="lbCounter"></p>
+      <div class="lb-actions">
+        <button class="lb-btn" id="lbHeartBtn" onclick="lbToggleHeart()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span id="lbHeartCount">0</span>
+        </button>
+        <button class="lb-btn" onclick="sharePhoto()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3" />
+            <circle cx="6" cy="12" r="3" />
+            <circle cx="18" cy="19" r="3" />
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+          </svg>
+          Share
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // DATA
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+
+    const PROJECTS = [
+      {
+        year: '2019', name: 'A space', tag: 'Memory · Archive', status: 'Completed', desc: 'An explorational project about memory, hobby and childhood. Just like no gravity and force. Can rethinking, slowly, burning and drawing. Can still feel and smell Mistakes.',
+        // ── FUTURE: change to 'pages/a-space.html' when you build local project pages
+        link: 'https://eighttwo7nine.wixsite.com/pphn/portfolio'
+      },
+      { year: '2020', name: 'Nothing is Something', tag: 'Night · Solitude', status: 'Completed', desc: 'When I was doing this project, I could hardly sleep at night. The nights became my own world. I\'m fine alone in that, where everyone is asleep.', link: 'https://eighttwo7nine.wixsite.com/pphn/portfolio' },
+      { year: '2021', name: 'ihnttw', tag: 'Personal · Emotional', status: 'Completed', desc: 'I do forgive others, but not myself. A quiet meditation on memory, guilt, and the sound of silence between people who should have spoken.', link: 'https://eighttwo7nine.wixsite.com/pphn/portfolio' },
+      { year: '2022', name: 'actionless action', tag: 'Mixed Media · Exhibition', status: 'Bagan Exhibition', desc: 'A recycled handmade book featured at the Bagan Exhibition. Visual storyboarding of life as a journey — archiving the early years of a growing artistic mind.', link: 'https://eighttwo7nine.wixsite.com/pphn/portfolio' },
+      { year: '2022–23', name: 'thabarwa', tag: 'Documentary', status: 'Completed', desc: 'Documenting a human community that depends on nature for survival — elderly, displaced, and disabled people. Final project of the CDPP21 program.', link: 'https://eighttwo7nine.wixsite.com/pphn/portfolio' },
+      { year: '2024', name: 'Swim Through the Mess', tag: 'Self-Documentary', status: 'Ongoing ●', desc: 'A developing project. The journey of \'p\', a photographer facing the aftermath of Myanmar\'s coup, a breakup, and financial hardship — finding light through despair.', link: 'https://eighttwo7nine.wixsite.com/pphn/portfolio' },
+    ];
+
+    const PHOTOS = [
+      { title: 'Golden Door', file: 'golden-door.jpg', h: '260px', tags: ['color', 'light'] },
+      { title: 'Possession Part', file: 'possession-part.jpg', h: '220px', tags: ['bnw', 'light'] },
+      { title: 'CPU', file: 'cpu.jpg', h: '280px', tags: ['color', 'street'] },
+      { title: 'B&W Cigarette', file: 'bnw-cigarette.jpg', h: '200px', tags: ['bnw', 'light'] },
+      { title: '#street_is_ours', file: 'street-is-ours.jpg', h: '240px', tags: ['bnw', 'street'] },
+      { title: 'Age of Darkness', file: 'actionless-action-2.jpg', h: '300px', tags: ['bnw', 'street'] },
+      { title: 'Leaf Peering', file: 'leaf-peering.jpg', h: '220px', tags: ['color', 'street'] },
+      { title: 'Shadow Geometry', file: 'shadow-geometry.jpg', h: '250px', tags: ['bnw', 'light'] },
+      { title: 'Night Window', file: 'night-window.jpg', h: '210px', tags: ['color', 'light'] },
+      { title: 'Safety First', file: 'safety-first.jpg', h: '240px', tags: ['color', 'street'] },
+      { title: 'Flower Mannequin', file: 'flower-mannequin.jpg', h: '260px', tags: ['color', 'light'] },
+      { title: 'Barbed Pyramids', file: 'barbed-pyramids.jpg', h: '220px', tags: ['color', 'light'] },
+      { title: 'Grey Sky Building', file: 'grey-sky-building.jpg', h: '320px', tags: ['color', 'street'] },
+      { title: 'Gecko Elevator', file: 'gecko-elevator.jpg', h: '260px', tags: ['color', 'street'] },
+      { title: 'Child at the Door', file: 'child-at-the-door.jpg', h: '300px', tags: ['color', 'street'] },
+      { title: 'Construction', file: 'construction-workers.jpg', h: '210px', tags: ['bnw', 'street'] },
+      { title: 'Misty Mountains', file: 'misty-mountains.jpg', h: '240px', tags: ['bnw', 'light'] },
+      { title: 'Empty Hall', file: 'empty-hall.jpg', h: '220px', tags: ['bnw', 'light'] },
+      { title: 'Lightning Yangon', file: 'lightning-yangon.jpg', h: '270px', tags: ['color', 'light'] },
+      { title: 'Cyclist Blur', file: 'cyclist-blur.jpg', h: '210px', tags: ['color', 'street'] },
+      { title: 'Visual Notes', file: 'visual-notes.jpg', h: '280px', tags: ['color'] },
+    ];
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // LANGUAGE
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    let isMM = false;
+    function toggleLang() {
+      isMM = !isMM;
+      document.getElementById('langBtn').textContent = isMM ? 'English' : 'မြန်မာ';
+      document.querySelectorAll('[data-mm]').forEach(el => {
+        el.innerHTML = el.getAttribute(isMM ? 'data-mm' : 'data-en');
+      });
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // HERO CURSOR
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    const hero = document.getElementById('hero');
+    const cur = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    hero.addEventListener('mousemove', e => {
+      cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
+      setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 80);
+    });
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // TIMELINE
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    let activeProject = -1;
+    const strip = document.getElementById('timelineStrip');
+    const track = document.getElementById('timelineTrack');
+
+    PROJECTS.forEach((p, i) => {
+      const node = document.createElement('div');
+      node.className = 'tl-node';
+      node.dataset.index = i;
+      node.innerHTML = `
+    <div class="tl-year">${p.year}</div>
+    <div class="tl-dot"></div>
+    <div class="tl-name">${p.name}</div>
+    <div class="tl-tag">${p.tag}</div>
+  `;
+      node.addEventListener('click', () => openProject(i, node));
+      strip.appendChild(node);
+    });
+
+    function openProject(i, nodeEl) {
+      const detail = document.getElementById('projectDetail');
+      const p = PROJECTS[i];
+      // Close if same
+      if (activeProject === i) { detail.classList.remove('open'); activeProject = -1; document.querySelectorAll('.tl-node').forEach(n => n.classList.remove('active')); return; }
+      activeProject = i;
+      document.querySelectorAll('.tl-node').forEach(n => n.classList.remove('active'));
+      nodeEl.classList.add('active');
+      // Populate
+      document.getElementById('pdYear').textContent = p.year;
+      document.getElementById('pdTag').textContent = p.tag;
+      document.getElementById('pdStatus').textContent = p.status;
+      document.getElementById('pdTitle').textContent = p.name;
+      document.getElementById('pdDesc').textContent = p.desc;
+      document.getElementById('pdLink').href = p.link;
+      detail.classList.add('open');
+      // Scroll detail into view
+      setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+    }
+
+    // Drag-to-scroll timeline
+    let isDragging = false, dragStartX = 0, scrollStart = 0;
+    track.addEventListener('mousedown', e => { isDragging = true; dragStartX = e.pageX; scrollStart = track.scrollLeft; track.classList.add('grabbing'); });
+    window.addEventListener('mousemove', e => { if (!isDragging) return; track.scrollLeft = scrollStart - (e.pageX - dragStartX); });
+    window.addEventListener('mouseup', () => { isDragging = false; track.classList.remove('grabbing'); });
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // GALLERY BUILD
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    let currentFilter = 'all';
+    let currentIndex = 0;
+
+    function buildGallery(filter) {
+      const masonry = document.getElementById('masonry');
+      masonry.innerHTML = '';
+      const filtered = PHOTOS.filter(p => filter === 'all' || p.tags.includes(filter));
+      document.getElementById('gcTotal').textContent = filtered.length + ' photos';
+
+      filtered.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'masonry-item';
+        item.dataset.title = p.title;
+        item.dataset.file = p.file;
+        item.dataset.origIndex = PHOTOS.indexOf(p);
+
+        const liked = isLiked(p.file);
+        const hearts = getHearts(p.file);
+
+        item.innerHTML = `
+      <div class="photo-wrap">
+        <img src="photos/${p.file}" alt="${p.title}" style="min-height:${p.h};" loading="lazy">
+      </div>
+      <div class="photo-actions">
+        <span class="photo-title-tag">${p.title}</span>
+        <button class="btn-heart ${liked ? 'liked' : ''}" onclick="toggleHeart(event,'${p.file}',this)" title="Like">
+          <svg viewBox="0 0 24 24" fill="${liked ? '#e63946' : 'none'}" stroke="${liked ? '#e63946' : 'currentColor'}" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span class="heart-count">${hearts || ''}</span>
+        </button>
+        <button class="btn-share" onclick="sharePhoto(event,'${p.title}')" title="Share">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+        <button class="btn-expand" onclick="openLightbox(event,${PHOTOS.indexOf(p)})" title="Expand">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </button>
+      </div>
+    `;
+        // Click image area opens lightbox
+        item.querySelector('.photo-wrap').addEventListener('click', () => openLightbox(null, PHOTOS.indexOf(p)));
+        masonry.appendChild(item);
+      });
+    }
+
+    function filterGallery(el, filter) {
+      document.querySelectorAll('.gc-filter').forEach(f => f.classList.remove('active'));
+      el.classList.add('active');
+      currentFilter = filter;
+      buildGallery(filter);
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // HEARTS (localStorage)
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    function isLiked(file) { return localStorage.getItem('pphn_like_' + file) === '1'; }
+    function getHearts(file) { return parseInt(localStorage.getItem('pphn_hearts_' + file) || 0); }
+
+    function toggleHeart(e, file, btn) {
+      e.stopPropagation();
+      const liked = isLiked(file);
+      const hearts = getHearts(file);
+      if (liked) {
+        localStorage.setItem('pphn_like_' + file, '0');
+        localStorage.setItem('pphn_hearts_' + file, Math.max(0, hearts - 1));
+        btn.classList.remove('liked');
+        btn.querySelector('svg').setAttribute('fill', 'none');
+        btn.querySelector('svg').setAttribute('stroke', 'currentColor');
+        btn.querySelector('.heart-count').textContent = hearts > 1 ? hearts - 1 : '';
+      } else {
+        localStorage.setItem('pphn_like_' + file, '1');
+        localStorage.setItem('pphn_hearts_' + file, hearts + 1);
+        btn.classList.add('liked');
+        btn.querySelector('svg').setAttribute('fill', '#e63946');
+        btn.querySelector('svg').setAttribute('stroke', '#e63946');
+        btn.querySelector('.heart-count').textContent = hearts + 1;
+        // Pulse animation
+        btn.querySelector('svg').style.transform = 'scale(1.4)';
+        setTimeout(() => btn.querySelector('svg').style.transform = '', 300);
+      }
+      // Sync lightbox if open
+      syncLbHeart();
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // SHARE
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    async function sharePhoto(e, title) {
+      if (e) e.stopPropagation();
+      const t = title || document.getElementById('lbTitle').textContent;
+      const url = 'https://pphn.github.io/';
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: `pphn — ${t}`, text: `"${t}" — documentary photography by pphn`, url });
+        } catch (err) { }
+      } else {
+        navigator.clipboard.writeText(url).then(() => showToast('Link copied to clipboard'));
+      }
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // LIGHTBOX
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    function openLightbox(e, index) {
+      if (e) e.stopPropagation();
+      currentIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function updateLightbox() {
+      const p = PHOTOS[currentIndex];
+      document.getElementById('lbImg').src = 'photos/' + p.file;
+      document.getElementById('lbTitle').textContent = p.title;
+      document.getElementById('lbCounter').textContent = (currentIndex + 1) + ' / ' + PHOTOS.length;
+      syncLbHeart();
+    }
+    function syncLbHeart() {
+      const p = PHOTOS[currentIndex];
+      if (!p) return;
+      const btn = document.getElementById('lbHeartBtn');
+      const liked = isLiked(p.file);
+      btn.classList.toggle('liked', liked);
+      document.getElementById('lbHeartCount').textContent = getHearts(p.file) || 0;
+    }
+    function lbToggleHeart() {
+      const p = PHOTOS[currentIndex];
+      const liked = isLiked(p.file);
+      const hearts = getHearts(p.file);
+      if (liked) { localStorage.setItem('pphn_like_' + p.file, '0'); localStorage.setItem('pphn_hearts_' + p.file, Math.max(0, hearts - 1)); }
+      else { localStorage.setItem('pphn_like_' + p.file, '1'); localStorage.setItem('pphn_hearts_' + p.file, hearts + 1); }
+      syncLbHeart();
+      updateCardHeart(p.file); // targeted — no gallery rebuild
+    }
+
+    // Update a single card's heart state without rebuilding the whole gallery
+    function updateCardHeart(file) {
+      const card = document.querySelector(`.masonry-item[data-file="${file}"]`);
+      if (!card) return;
+      const btn = card.querySelector('.btn-heart');
+      if (!btn) return;
+      const liked = isLiked(file);
+      const hearts = getHearts(file);
+      btn.classList.toggle('liked', liked);
+      const svg = btn.querySelector('svg');
+      svg.setAttribute('fill', liked ? '#e63946' : 'none');
+      svg.setAttribute('stroke', liked ? '#e63946' : 'currentColor');
+      btn.querySelector('.heart-count').textContent = hearts || '';
+      updateTotalLikes();
+    }
+
+    // Live total likes counter across all photos
+    function updateTotalLikes() {
+      const total = PHOTOS.reduce((s, p) => s + getHearts(p.file), 0);
+      const el = document.getElementById('totalLikesCount');
+      if (el) el.textContent = total > 0 ? `${total} ♥` : '';
+    }
+    function lbNav(dir) {
+      currentIndex = (currentIndex + dir + PHOTOS.length) % PHOTOS.length;
+      updateLightbox();
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+    });
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // TOAST
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // SCROLL REVEAL
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    // INIT
+    // ━━━━━━━━━━━━━━━━━━━━━━━
+    buildGallery('all');
+    updateTotalLikes();
+  </script>
+</body>
+
+</html>

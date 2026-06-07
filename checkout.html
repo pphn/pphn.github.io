@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pphn — Checkout</title>
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26' fill='%23c9a84c'%3Ep%3C/text%3E%3C/svg%3E" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #c9a84c;
+      --dark: #0a0a0a;
+      --mid: #111;
+      --light: #f0ebe0;
+      --green: #2a9d6a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .35;
+    }
+
+    /* NAV */
+    .co-nav {
+      padding: 1.4rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(201, 168, 76, .08);
+      position: sticky;
+      top: 0;
+      background: rgba(10, 10, 10, .95);
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .co-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: .15em;
+    }
+
+    .co-back {
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--light);
+      opacity: .35;
+      text-decoration: none;
+      transition: .25s;
+    }
+
+    .co-back:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    /* HERO */
+    .co-hero {
+      padding: 5rem 2.5rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .co-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .co-hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .co-hero p {
+      font-size: .88rem;
+      opacity: .45;
+      line-height: 2;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-tag-item {
+      font-size: .6rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      opacity: .3;
+    }
+
+    .hero-tag-item span {
+      color: var(--gold);
+      margin-right: .4rem;
+    }
+
+    /* STEP WRAPPER */
+    .step {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem;
+    }
+
+    .step-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .step-num-row {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: .8rem;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .6rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .step-lbl {
+      font-size: .6rem;
+      letter-spacing: .4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .6;
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+    }
+
+    .step-sub {
+      font-size: .8rem;
+      opacity: .4;
+      line-height: 1.9;
+      margin-top: .5rem;
+    }
+
+    .step-sub a {
+      color: var(--gold);
+      opacity: .8;
+    }
+
+    /* PRODUCT GRID */
+    .prod-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .prod-card {
+      border: 1px solid rgba(201, 168, 76, .1);
+      padding: 1.8rem;
+      cursor: pointer;
+      transition: .3s;
+      position: relative;
+      background: var(--dark);
+    }
+
+    .prod-card:hover {
+      border-color: rgba(201, 168, 76, .3);
+      transform: translateY(-2px);
+    }
+
+    .prod-card.selected {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, .04);
+    }
+
+    .prod-card.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      color: var(--gold);
+      font-size: .9rem;
+    }
+
+    .prod-icon {
+      font-size: 1.6rem;
+      margin-bottom: .8rem;
+    }
+
+    .prod-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: .5rem;
+    }
+
+    .prod-desc {
+      font-size: .75rem;
+      opacity: .45;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .prod-price {
+      font-size: .95rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .prod-price .usd {
+      font-size: .7rem;
+      opacity: .5;
+      margin-left: .3rem;
+    }
+
+    .prod-inquiry {
+      font-size: .75rem;
+      color: var(--gold);
+      opacity: .55;
+      font-style: italic;
+    }
+
+    /* PAYMENT TABS */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201, 168, 76, .1), transparent);
+      margin: 0;
+    }
+
+    .tab-row {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(201, 168, 76, .15);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .tab {
+      flex: 1;
+      padding: .9rem;
+      background: transparent;
+      border: none;
+      color: var(--light);
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: .25s;
+      opacity: .5;
+    }
+
+    .tab:hover {
+      background: rgba(201, 168, 76, .05);
+      opacity: .8;
+    }
+
+    .tab.active {
+      background: rgba(201, 168, 76, .1);
+      color: var(--gold);
+      opacity: 1;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* BANK CARD */
+    .bank-card {
+      background: rgba(201, 168, 76, .03);
+      border: 1px solid rgba(201, 168, 76, .12);
+      margin-bottom: 2rem;
+    }
+
+    .bank-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(201, 168, 76, .07);
+      gap: 1rem;
+    }
+
+    .bank-row:last-child {
+      border-bottom: none;
+    }
+
+    .bk {
+      flex: 1;
+    }
+
+    .bk-key {
+      font-size: .58rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      opacity: .35;
+      margin-bottom: .3rem;
+    }
+
+    .bk-val {
+      font-size: .9rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+    }
+
+    .bk-val.gold {
+      color: var(--gold);
+    }
+
+    /* SENSITIVE VALUES — hidden by default, click to reveal */
+    .sensitive-val {
+      filter: blur(5px);
+      user-select: none;
+      cursor: pointer;
+      transition: filter .35s ease;
+      border-radius: 2px;
+    }
+
+    .sensitive-val.revealed {
+      filter: none;
+      user-select: text;
+      cursor: default;
+    }
+
+    .reveal-hint {
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .4;
+      margin-top: .35rem;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+
+    .reveal-hint:hover {
+      opacity: .75;
+    }
+
+    .reveal-hint.hidden {
+      display: none;
+    }
+
+    .copy-btn {
+      flex-shrink: 0;
+      background: none;
+      border: 1px solid rgba(201, 168, 76, .18);
+      color: var(--gold);
+      font-size: .55rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: .3rem .7rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: .25s;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: rgba(201, 168, 76, .12);
+    }
+
+    .copy-btn.copied {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /* STEP LIST */
+    .steps-list {
+      margin-bottom: 1.5rem;
+    }
+
+    .si {
+      display: flex;
+      gap: 1.2rem;
+      padding: .9rem 0;
+      border-bottom: 1px solid rgba(201, 168, 76, .05);
+    }
+
+    .si:last-child {
+      border-bottom: none;
+    }
+
+    .si-n {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 168, 76, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .6rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: .15rem;
+    }
+
+    .si-t {
+      font-size: .82rem;
+      line-height: 1.85;
+      opacity: .55;
+    }
+
+    .si-t strong {
+      color: var(--light);
+      opacity: 1;
+    }
+
+    .si-t code {
+      background: rgba(201, 168, 76, .08);
+      color: var(--gold);
+      padding: .1rem .4rem;
+      font-size: .78rem;
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* WISE TIP */
+    .wise-tip {
+      background: rgba(42, 157, 106, .05);
+      border: 1px solid rgba(42, 157, 106, .2);
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .wise-tip .tip-lbl {
+      font-size: .58rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .4rem;
+    }
+
+    .wise-tip p {
+      font-size: .8rem;
+      line-height: 1.8;
+      color: rgba(42, 157, 106, .85);
+    }
+
+    /* NOTICE */
+    .notice {
+      background: rgba(201, 168, 76, .04);
+      border-left: 2px solid rgba(201, 168, 76, .25);
+      padding: 1rem 1.5rem;
+      font-size: .78rem;
+      line-height: 1.85;
+      opacity: .6;
+    }
+
+    .notice strong {
+      color: var(--gold);
+      opacity: 1;
+    }
+
+    /* REFERENCE BOX */
+    .ref-box {
+      background: rgba(201, 168, 76, .05);
+      border: 1px solid rgba(201, 168, 76, .2);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
+
+    .ref-label {
+      font-size: .58rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      opacity: .35;
+      margin-bottom: .3rem;
+    }
+
+    .ref-code {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+    }
+
+    /* FORM */
+    .co-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ff {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .ff.full {
+      grid-column: 1/-1;
+    }
+
+    .ff label {
+      font-size: .58rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+
+    .ff input,
+    .ff textarea,
+    .ff select {
+      background: rgba(201, 168, 76, .04);
+      border: 1px solid rgba(201, 168, 76, .12);
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+      font-size: .85rem;
+      padding: .8rem 1rem;
+      transition: .25s;
+      outline: none;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+
+    .ff input:focus,
+    .ff textarea:focus {
+      border-color: rgba(201, 168, 76, .4);
+    }
+
+    .ff input[readonly] {
+      opacity: .4;
+      cursor: default;
+    }
+
+    .ff textarea {
+      min-height: 75px;
+      resize: vertical;
+    }
+
+    /* SUBMIT */
+    .submit-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--gold);
+      color: #000;
+      font-size: .7rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      transition: .3s;
+    }
+
+    .submit-btn:hover {
+      background: #e8c060;
+    }
+
+    .submit-note {
+      font-size: .62rem;
+      opacity: .3;
+      margin-top: .7rem;
+      line-height: 1.7;
+      letter-spacing: .05em;
+    }
+
+    /* TIMELINE */
+    .co-timeline {}
+
+    .cti {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+
+    .cti-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 14px;
+    }
+
+    .cti-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .cti-line {
+      flex: 1;
+      width: 1px;
+      background: rgba(201, 168, 76, .12);
+      margin-top: .3rem;
+    }
+
+    .cti:last-child .cti-line {
+      display: none;
+    }
+
+    .cti-body {}
+
+    .cti-when {
+      font-size: .58rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .6;
+      margin-bottom: .3rem;
+    }
+
+    .cti-desc {
+      font-size: .82rem;
+      line-height: 1.85;
+      opacity: .5;
+    }
+
+    .cti-desc strong {
+      color: var(--light);
+      opacity: 1;
+    }
+
+    /* FOOTER */
+    .co-footer {
+      border-top: 1px solid rgba(201, 168, 76, .07);
+      padding: 1.8rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: .62rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      opacity: .3;
+    }
+
+    .co-footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    @media(max-width:640px) {
+      .prod-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .co-form {
+        grid-template-columns: 1fr;
+      }
+
+      .ff.full {
+        grid-column: 1;
+      }
+
+      .bank-row {
+        flex-wrap: wrap;
+      }
+
+      .co-nav {
+        padding: 1.1rem 1.2rem;
+      }
+
+      .step {
+        padding: 3rem 1.2rem;
+      }
+
+      .co-hero {
+        padding: 3.5rem 1.2rem 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="co-nav">
+    <a href="index.html" class="co-logo">pphn</a>
+    <a href="index.html" class="co-back">← Portfolio</a>
+  </nav>
+
+  <div class="co-hero">
+    <h1>Direct <em>Support</em></h1>
+    <p>Every purchase goes directly to pphn — funding the next documentary project. Manual bank transfer · Digital files
+      delivered within 12 hours.</p>
+    <div class="hero-tags">
+      <span class="hero-tag-item"><span>●</span>No platform fees</span>
+      <span class="hero-tag-item"><span>●</span>Bank transfer</span>
+      <span class="hero-tag-item"><span>●</span>Digital delivery by email</span>
+      <span class="hero-tag-item"><span>●</span>India & International</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── STEP 1 ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num-row">
+        <div class="step-circle">01</div><span class="step-lbl">Select</span>
+      </div>
+      <h2 class="step-title">Choose your product</h2>
+      <p class="step-sub">Physical merch (mugs, hoodies, tote bags) →
+        <a href="https://pphn.creator-spring.com/" target="_blank">Creator Spring store</a>
+      </p>
+    </div>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── STEP 2 ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num-row">
+        <div class="step-circle">02</div><span class="step-lbl">Transfer</span>
+      </div>
+      <h2 class="step-title">Send payment</h2>
+      <p class="step-sub">Choose your transfer method. Use your order reference as the payment remark so pphn can match
+        your transfer.</p>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab active" onclick="setTab(event,'india')">🇮🇳 &nbsp;India — NEFT / IMPS</button>
+      <button class="tab" onclick="setTab(event,'intl')">🌍 &nbsp;International — Wise / Wire</button>
+    </div>
+
+    <!-- INDIA -->
+    <div class="tab-content active" id="tab-india">
+      <div class="bank-card">
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Account Name</div>
+            <div class="bk-val">PYAE PHYO HTET NAING</div>
+          </div><button class="copy-btn" onclick="copyVal('PYAE PHYO HTET NAING',this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Account Number</div>
+            <div class="bk-val gold">
+              <span class="sensitive-val" id="ind-acct" onclick="revealVal(this)">1526100600000250</span>
+              <div class="reveal-hint" id="ind-acct-hint" onclick="revealVal(document.getElementById('ind-acct'))">click
+                to reveal</div>
+            </div>
+          </div>
+          <button class="copy-btn" onclick="copyVal(document.getElementById('ind-acct').textContent,this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">IFSC Code</div>
+            <div class="bk-val">
+              <span class="sensitive-val" id="ind-ifsc" onclick="revealVal(this)">PUNB0152610</span>
+              <div class="reveal-hint" id="ind-ifsc-hint" onclick="revealVal(document.getElementById('ind-ifsc'))">click
+                to reveal</div>
+            </div>
+          </div>
+          <button class="copy-btn" onclick="copyVal(document.getElementById('ind-ifsc').textContent,this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Bank</div>
+            <div class="bk-val">Punjab National Bank · India</div>
+          </div>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Payment Remark / Reference</div>
+            <div class="bk-val gold" id="ref-india-display">—</div>
+          </div><button class="copy-btn"
+            onclick="copyVal(document.getElementById('ref-india-display').textContent,this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="steps-list">
+        <div class="si">
+          <div class="si-n">1</div>
+          <div class="si-t">Open your bank's mobile app — SBI YONO, HDFC, Axis, Kotak, or any Indian bank app.</div>
+        </div>
+        <div class="si">
+          <div class="si-n">2</div>
+          <div class="si-t">Tap <strong>Fund Transfer</strong> → choose <strong>NEFT</strong> or <strong>IMPS</strong>
+            (IMPS is instant, NEFT takes up to 2 hours).</div>
+        </div>
+        <div class="si">
+          <div class="si-n">3</div>
+          <div class="si-t">Add beneficiary: enter the <strong>account number</strong> and <strong>IFSC code</strong>
+            shown above. Select <strong>Savings account</strong>.</div>
+        </div>
+        <div class="si">
+          <div class="si-n">4</div>
+          <div class="si-t">Enter the amount shown for your product. Example: <code>₹249</code> for a single wallpaper.
+          </div>
+        </div>
+        <div class="si">
+          <div class="si-n">5</div>
+          <div class="si-t">In the <strong>Remarks</strong> or <strong>Narration</strong> field, type your <strong>order
+              reference</strong> (shown in Step 3 below). This is how pphn identifies your payment.</div>
+        </div>
+        <div class="si">
+          <div class="si-n">6</div>
+          <div class="si-t">Confirm the transfer. <strong>Screenshot</strong> the success screen — you'll attach it to
+            the email in Step 3.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERNATIONAL -->
+    <div class="tab-content" id="tab-intl">
+      <div class="wise-tip">
+        <div class="tip-lbl">💡 Recommended — Wise (wise.com)</div>
+        <p>Wise is cheaper and faster than traditional wire transfers for Indian bank accounts. Works from most
+          countries — US, EU, UK, Japan, Singapore and more.</p>
+      </div>
+      <div class="bank-card">
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Account Name</div>
+            <div class="bk-val">PYAE PHYO HTET NAING</div>
+          </div><button class="copy-btn" onclick="copyVal('PYAE PHYO HTET NAING',this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Account Number</div>
+            <div class="bk-val gold">
+              <span class="sensitive-val" id="intl-acct" onclick="revealVal(this)">1526100600000250</span>
+              <div class="reveal-hint" id="intl-acct-hint" onclick="revealVal(document.getElementById('intl-acct'))">
+                click to reveal</div>
+            </div>
+          </div>
+          <button class="copy-btn"
+            onclick="copyVal(document.getElementById('intl-acct').textContent,this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">IFSC Code (for Wise)</div>
+            <div class="bk-val">
+              <span class="sensitive-val" id="intl-ifsc" onclick="revealVal(this)">PUNB0152610</span>
+              <div class="reveal-hint" id="intl-ifsc-hint" onclick="revealVal(document.getElementById('intl-ifsc'))">
+                click to reveal</div>
+            </div>
+          </div>
+          <button class="copy-btn"
+            onclick="copyVal(document.getElementById('intl-ifsc').textContent,this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">SWIFT / BIC (wire transfer)</div>
+            <div class="bk-val gold">
+              <span class="sensitive-val" id="intl-swift" onclick="revealVal(this)">PUNBINBBC17</span>
+              <div class="reveal-hint" id="intl-swift-hint" onclick="revealVal(document.getElementById('intl-swift'))">
+                click to reveal</div>
+            </div>
+          </div>
+          <button class="copy-btn"
+            onclick="copyVal(document.getElementById('intl-swift').textContent,this)">Copy</button>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Bank · Country</div>
+            <div class="bk-val">Punjab National Bank · India</div>
+          </div>
+        </div>
+        <div class="bank-row">
+          <div class="bk">
+            <div class="bk-key">Receiving Currency</div>
+            <div class="bk-val">INR (Indian Rupee)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-list">
+        <div class="si">
+          <div class="si-n">1</div>
+          <div class="si-t">Go to <strong>wise.com</strong> or open the Wise app. Create a free account — it takes 5
+            minutes.</div>
+        </div>
+        <div class="si">
+          <div class="si-n">2</div>
+          <div class="si-t">Click <strong>Send money</strong> → select <strong>India</strong> as destination → currency:
+            <strong>INR</strong>.
+          </div>
+        </div>
+        <div class="si">
+          <div class="si-n">3</div>
+          <div class="si-t">Choose <strong>Bank Transfer</strong> as the recipient type. Enter the IFSC code and account
+            number above.</div>
+        </div>
+        <div class="si">
+          <div class="si-n">4</div>
+          <div class="si-t">Wise shows the exact fee and exchange rate before you confirm.</div>
+        </div>
+        <div class="si">
+          <div class="si-n">5</div>
+          <div class="si-t">In the <strong>Reference</strong> field enter your order reference (from Step 3 below).
+            Complete the transfer.</div>
+        </div>
+        <div class="si">
+          <div class="si-n">6</div>
+          <div class="si-t">Save the confirmation screen. Fill in the form in Step 3 and attach it to the email.</div>
+        </div>
+      </div>
+      <div class="notice"><strong>Note:</strong> Not in a Wise-supported country? Email
+        <strong>pphn8279@proton.me</strong> before transferring — pphn will arrange an alternative method for you.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── STEP 3 ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num-row">
+        <div class="step-circle">03</div><span class="step-lbl">Confirm</span>
+      </div>
+      <h2 class="step-title">Confirm your transfer</h2>
+      <p class="step-sub">Fill this in after you've sent the payment. Clicking Submit opens your email app with
+        everything pre-filled — attach your transfer screenshot and send.</p>
+    </div>
+
+    <div class="ref-box">
+      <div>
+        <div class="ref-label">Your unique order reference</div>
+        <div class="ref-code" id="refCode">PPHN-——</div>
+      </div>
+      <button class="copy-btn" onclick="copyVal(document.getElementById('refCode').textContent,this)">Copy</button>
+    </div>
+
+    <div class="co-form">
+      <div class="ff"><label>Your Name *</label><input type="text" id="f-name" placeholder="Full name" /></div>
+      <div class="ff"><label>Your Email *</label><input type="email" id="f-email"
+          placeholder="Files will be sent here" /></div>
+      <div class="ff"><label>Product</label><input type="text" id="f-product" readonly
+          placeholder="Select product in Step 1" /></div>
+      <div class="ff"><label>Amount Transferred *</label><input type="text" id="f-amount"
+          placeholder="e.g. ₹249 or $3" /></div>
+      <div class="ff"><label>Transfer Date *</label><input type="date" id="f-date" /></div>
+      <div class="ff"><label>Last 4 Digits of Your Account</label><input type="text" id="f-acct4"
+          placeholder="Optional — helps pphn verify faster" maxlength="4" /></div>
+      <div class="ff full"><label>Any Notes</label><textarea id="f-note"
+          placeholder="Print size, wallpaper format preference, commission brief, etc."></textarea></div>
+    </div>
+
+    <button class="submit-btn" onclick="submitOrder()">Open Confirmation Email →</button>
+    <p class="submit-note">
+      This opens your default email app (Gmail, ProtonMail, etc.) with all details pre-filled.<br>
+      Please attach your transfer screenshot before hitting Send.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── STEP 4 ── -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num-row">
+        <div class="step-circle">04</div><span class="step-lbl">Delivery</span>
+      </div>
+      <h2 class="step-title">What happens next</h2>
+    </div>
+
+    <div class="co-timeline">
+      <div class="cti">
+        <div class="cti-left">
+          <div class="cti-dot"></div>
+          <div class="cti-line"></div>
+        </div>
+        <div class="cti-body">
+          <div class="cti-when">Right away</div>
+          <div class="cti-desc">pphn receives your confirmation email with the order reference and transfer details.
+          </div>
+        </div>
+      </div>
+      <div class="cti">
+        <div class="cti-left">
+          <div class="cti-dot"></div>
+          <div class="cti-line"></div>
+        </div>
+        <div class="cti-body">
+          <div class="cti-when">Within 12 hours</div>
+          <div class="cti-desc">pphn verifies the bank transfer and replies to your email with the <strong>digital file
+              attached</strong> (or a Drive link for large files). Check your spam folder if you don't see it.</div>
+        </div>
+      </div>
+      <div class="cti">
+        <div class="cti-left">
+          <div class="cti-dot"></div>
+          <div class="cti-line"></div>
+        </div>
+        <div class="cti-body">
+          <div class="cti-when">No reply after 48 hours?</div>
+          <div class="cti-desc">Something went wrong. Email <strong>pphn8279@proton.me</strong> directly with your
+            reference code. pphn personally handles every order.</div>
+        </div>
+      </div>
+      <div class="cti">
+        <div class="cti-left">
+          <div class="cti-dot"></div>
+        </div>
+        <div class="cti-body">
+          <div class="cti-when">Commissions</div>
+          <div class="cti-desc">For custom artwork, pphn will email you first to discuss the brief, timeline and final
+            price — <strong>no payment until you both agree</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:2.5rem;">
+      <strong>Why manual?</strong> Standard payment processors aren't available in this situation. This way your payment
+      goes directly — no middlemen, no platform fees.
+    </div>
+  </div>
+
+  <footer class="co-footer">
+    <span>© 2026 pphn — Pyae Phyo Htet Naing</span>
+    <a href="index.html">← pphn.github.io</a>
+  </footer>
+
+  <script>
+    // ── PRODUCTS ──
+    const PRODUCTS = [
+      {
+        id: 'wallpaper', icon: '🖼', name: 'Limited Wallpaper',
+        desc: 'Single high-res wallpaper — mobile + desktop resolution. Choose any from the gallery.',
+        inr: 249, usd: 3, type: 'digital'
+      },
+      {
+        id: 'wallpaper-pack', icon: '🎞', name: 'Wallpaper Pack ×5',
+        desc: 'Five curated wallpapers from pphn\'s archive. A personal selection.',
+        inr: 999, usd: 12, type: 'digital'
+      },
+      {
+        id: 'print', icon: '📸', name: 'Print-Ready File',
+        desc: 'A3 high-resolution digital file ready for professional printing. Your choice of photo.',
+        inr: 1499, usd: 18, type: 'digital'
+      },
+      {
+        id: 'commission', icon: '✦', name: 'Custom Commission',
+        desc: 'Custom artwork, photography brief, or personal project. Discuss via email first — no payment until agreed.',
+        inr: null, usd: null, type: 'commission'
+      },
+    ];
+
+    let chosen = null;
+
+    // Build reference code (unique for everyone, regenerated per session/user, persistent on refresh)
+    function getReferenceCode() {
+      let code = sessionStorage.getItem('pphn_ref_code');
+      if (!code) {
+        const timePart = Date.now().toString(36).toUpperCase().slice(-4);
+        const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase().padEnd(4, 'X');
+        code = `PPHN-${timePart}-${randomPart}`;
+        sessionStorage.setItem('pphn_ref_code', code);
+      }
+      return code;
+    }
+    const REF = getReferenceCode();
+    document.getElementById('refCode').textContent = REF;
+    document.getElementById('ref-india-display').textContent = REF;
+
+    // Set today's date
+    document.getElementById('f-date').valueAsDate = new Date();
+
+    // Build product cards
+    const grid = document.getElementById('prodGrid');
+    PRODUCTS.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'prod-card';
+      card.innerHTML = `
+    <div class="prod-icon">${p.icon}</div>
+    <div class="prod-name">${p.name}</div>
+    <div class="prod-desc">${p.desc}</div>
+    ${p.type === 'commission'
+          ? `<div class="prod-inquiry">Discuss via email first — price agreed before any payment</div>`
+          : `<div class="prod-price">₹${p.inr} <span class="usd">≈ $${p.usd}</span></div>`
+        }
+  `;
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.prod-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        chosen = p;
+        document.getElementById('f-product').value = p.name;
+        document.getElementById('f-amount').value = p.type === 'commission' ? 'To be agreed via email' : `₹${p.inr}  (~$${p.usd})`;
+        // Smooth scroll to payment section
+        document.querySelector('.tab-row').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      grid.appendChild(card);
+    });
+
+    // Tabs
+    function setTab(e, id) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      e.target.classList.add('active');
+      document.getElementById('tab-' + id).classList.add('active');
+    }
+
+    // Reveal sensitive value
+    function revealVal(el) {
+      el.classList.add('revealed');
+      const hint = document.getElementById(el.id + '-hint');
+      if (hint) hint.classList.add('hidden');
+    }
+
+    // Copy
+    function copyVal(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        btn.textContent = 'Copied ✓'; btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    // Submit → mailto
+    function submitOrder() {
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const product = document.getElementById('f-product').value.trim();
+      const amount = document.getElementById('f-amount').value.trim();
+      const date = document.getElementById('f-date').value;
+      const acct4 = document.getElementById('f-acct4').value.trim();
+      const note = document.getElementById('f-note').value.trim();
+
+      if (!name || !email || !product || !amount) {
+        alert('Please fill in your name, email, product and amount before submitting.');
+        return;
+      }
+
+      const subject = encodeURIComponent(`pphn Order — ${REF} — ${product}`);
+      const body = encodeURIComponent(
+        `Hi pphn,
+
+I have transferred payment for the following order.
+
+─────────────────────────────
+ORDER REFERENCE : ${REF}
+Product         : ${product}
+Amount Paid     : ${amount}
+Transfer Date   : ${date || 'Not specified'}
+My Account Last4: ${acct4 || 'Not provided'}
+─────────────────────────────
+
+My Name  : ${name}
+My Email : ${email}
+
+${note ? 'Notes:\n' + note + '\n' : ''}
+Please find my transfer screenshot attached.
+
+Thank you,
+${name}
+
+—
+Sent via pphn.github.io/checkout`
+      );
+
+      // Clear the reference code from session storage so a new code is generated for the next order/session
+      sessionStorage.removeItem('pphn_ref_code');
+
+      window.location.href = `mailto:pphn8279@proton.me?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+
+</html>
